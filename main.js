@@ -6,68 +6,132 @@ const app = {
     page: "game",
     userInput: "",
     randomWord: "",
-
 }
 
-const renderPage = () => {
-    $(".page").hide();
-    $(`#${app.page}Page`).show();
-};
-
-
-
-
+// //Produce random word from words array
 const getRandomWord = () => {
     const randomIndex = Math.floor(Math.random() * app.words.length);
-    const $randomWord = $("<div>").attr("id", "random-word")
-    $("#display").append($randomWord).text(app.words[randomIndex]);
     app.randomWord = app.words[randomIndex];
-
+    $("#randomWord").text(app.randomWord)
 }
-getRandomWord();
 
 
+const startButton = () => {
+    $("#startButton").on("click", () => {
+        getRandomWord();
+    })
+}
+startButton();
+
+
+//--------------------Get and set result------------------------------->
+
+//Getting user input
 const getUserInput = () => {
-    app.words.userInput = $("#user-input").val();
-    // console.log(app.words.userInput)
+    app.userInput = $("#user-input").val();
+    return app.userInput;
 }
 
-
+//Comparing user input and randomword. If true, result++
 const getResult = () => {
-
-    if (app.words.userInput === app.randomWord) {
-        app.result++;
+    if (getUserInput() === app.randomWord) {
+        app.result++
+        $("#result").text(app.result)
     }
-    // const $results = $("<div>").attr("id", "results").text(app.result)
-    // $("#gamePage").append($results);
-    console.log(app.result);
-
 }
 
+//---------------setting button and Enter Key---------------------------------
+$("#submitButton").on("click", () => {
+    getResult()
+    getRandomWord()
+})
 
 
-const render = () => {
-    $("#submitButton").on("click", (event) => {
-        event.preventDefault();
-        getResult();
+
+$("#user-input").on("keypress", (event) => {
+    if (event.key === 'Enter') {
+        getResult()
         getRandomWord()
-        getUserInput();
-    });
+    }
+    emptyUserInput();
 }
-
-const score = () => {
-    const $score = $("<div>").attr("id", "score").text(app.result)
-    $("#scorePage").append($score);
-};
+);
 
 
-
-score();
-
-
-const main = () => {
-    render();
-    renderPage();
-
+const emptyUserInput = () => {
+    $("#user-input").val(' ');
 }
-main();
+// const enterButton = () => {
+//     $("#user-input").on("keypress", (event) => {
+//         if (event.key === 'Enter') {
+//             submitButton();
+//         }
+//     })
+// }
+
+// enterButton();
+
+
+// const getUserInput = () => {
+//     $("#user-input").on("keypress", (event) => {
+//         app.userInput = $("#user-input").val();
+//         if (event.key === 'Enter') {
+//             console.log(app.userInput)
+//             getRandomWord()
+//         }
+//     })
+// }
+// getUserInput();
+
+
+
+// const getUserInput = () => {
+//     app.words.userInput = $("#user-input").val();
+//     $("#user-input").on("keypress", (event) => {
+//         if (event.key === 'Enter') {
+//             console.log('Enter')
+//         }
+//     })
+// };
+// getUserInput();
+
+
+
+
+// const getResult = () => {
+//     if (app.words.userInput === app.randomWord) {
+//         app.result++;
+//     }
+//     // const $results = $("<div>").attr("id", "results").text(app.result)
+//     // $("#gamePage").append($results);
+//     console.log(app.result);
+// }
+
+
+// const render = () => {
+//     $("#submitButton").on("click", () => {
+//         getResult();
+//         getUserInput();
+//         getRandomWord()
+//         $("output").text(app.result);
+
+//     });
+// }
+
+// // const renderPage = () => {
+// //     $(".page").hide();
+// //     $(`#${app.page}Page`).show();
+// // };
+
+// // const scorePage = () => {
+// //     const $score = $("<div>").attr("id", "score").text(app.result)
+// //     $("#scorePage").append($score);
+// // }
+// // scorePage();
+
+
+// const main = () => {
+//     render();
+//     // renderPage();
+// }
+// main();
