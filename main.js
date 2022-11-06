@@ -1,12 +1,21 @@
 import $ from "jquery";
 
 const app = {
-    words: ['velociraptor', 'brachiosaurus', 'tyrannosaurus'],
-    result: 0,
-    page: "game",
-    userInput: "",
+    words: ["albertosaurus", "allosaurus", "tyrannosaur", "Sauropods", "achelousaurus"],
+    page: "startPage",
     randomWord: "",
+    userInput: "",
+    result: 0,
+    mistake: 0,
 }
+
+const renderPage = () => {
+
+    $(".page").hide();
+    $(`#${app.page}`).show();
+};
+renderPage();
+
 
 // //Produce random word from words array
 const getRandomWord = () => {
@@ -18,120 +27,91 @@ const getRandomWord = () => {
 
 const startButton = () => {
     $("#startButton").on("click", () => {
+        app.page = "gamePage"
         getRandomWord();
+        console.log(app.page);
+        renderPage();
+        game();
     })
 }
-startButton();
+startButton()
+
+
 
 
 //--------------------Get and set result------------------------------->
 
-//Getting user input
-const getUserInput = () => {
-    app.userInput = $("#user-input").val();
-    return app.userInput;
-}
-
 //Comparing user input and randomword. If true, result++
+const getUserInput = () => $("#user-input").val()
+
+
 const getResult = () => {
     if (getUserInput() === app.randomWord) {
-        app.result++
-        $("#result").text(app.result)
+        app.result++;
+        $("#result").text(`Correct: ${app.result}`)
+
     }
-}
+    else {
+        app.mistake++;
+        $("#mistake").text(`Mistake: ${app.mistake}`)
 
-//---------------setting button and Enter Key---------------------------------
-$("#submitButton").on("click", () => {
-    getResult()
-    getRandomWord()
-})
-
-
-
-$("#user-input").on("keypress", (event) => {
-    if (event.key === 'Enter') {
-        getResult()
-        getRandomWord()
     }
-    emptyUserInput();
+
 }
-);
 
 
-const emptyUserInput = () => {
-    $("#user-input").val(' ');
+//---------------setting Enter Key---------------------------------
+
+const game = () => {
+    $("#user-input").on("keypress", (event) => {
+        if (event.key === 'Enter') {
+            getResult()
+            getRandomWord()
+            emptyUserInput();
+        }
+    }
+    )
+};
+
+
+const emptyUserInput = () => $("#user-input").val('');
+
+const exitButton = () => {
+    $("#exitButton").on("click", () => {
+        app.page = "scorePage";
+        renderPage();
+
+    })
 }
-// const enterButton = () => {
-//     $("#user-input").on("keypress", (event) => {
-//         if (event.key === 'Enter') {
-//             submitButton();
-//         }
-//     })
-// }
+exitButton();
 
-// enterButton();
+const restartButton = () => {
+    $("#restartButton").on("click", () => {
+        app.page = "gamePage";
+        renderPage();
 
-
-// const getUserInput = () => {
-//     $("#user-input").on("keypress", (event) => {
-//         app.userInput = $("#user-input").val();
-//         if (event.key === 'Enter') {
-//             console.log(app.userInput)
-//             getRandomWord()
-//         }
-//     })
-// }
-// getUserInput();
+    })
+}
+restartButton();
 
 
 
-// const getUserInput = () => {
-//     app.words.userInput = $("#user-input").val();
-//     $("#user-input").on("keypress", (event) => {
-//         if (event.key === 'Enter') {
-//             console.log('Enter')
-//         }
-//     })
-// };
-// getUserInput();
-
-
-
-
-// const getResult = () => {
-//     if (app.words.userInput === app.randomWord) {
-//         app.result++;
-//     }
-//     // const $results = $("<div>").attr("id", "results").text(app.result)
-//     // $("#gamePage").append($results);
-//     console.log(app.result);
-// }
-
-
+//------------------render ------------------------------
 // const render = () => {
-//     $("#submitButton").on("click", () => {
-//         getResult();
-//         getUserInput();
-//         getRandomWord()
-//         $("output").text(app.result);
+//     renderPage();
+//     setupMovementButtonHandlers();
+//     game();
+// };
 
+// const setupMovementButtonHandlers = () => {
+//     $("#startButton").on("click", () => {
+//         app.page = "gamePage";
+//         render();
+//         console.log(app.page)
 //     });
-// }
+//     // $("#gameButton").on("click", () => {
+//     //     app.page = "scorePage";
+//     //     render();
+//     // });
 
-// // const renderPage = () => {
-// //     $(".page").hide();
-// //     $(`#${app.page}Page`).show();
-// // };
-
-// // const scorePage = () => {
-// //     const $score = $("<div>").attr("id", "score").text(app.result)
-// //     $("#scorePage").append($score);
-// // }
-// // scorePage();
-
-
-// const main = () => {
-//     render();
-//     // renderPage();
-// }
-// main();
+// };

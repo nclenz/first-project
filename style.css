@@ -1,0 +1,32 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    padding: 60px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+
+}
+
+.score {
+    display: inline-flex;
+    justify-content: space-around;
+    padding: 50px;
+    margin: 20px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#randomWord {
+    font-size: 50px;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: rebeccapurple
+}
+
+body {
+    background-color: aqua;
+}

@@ -4,8 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speed Typing Game</title>
+  <script src="/path/to/cdn/jquery.min.js"></script>
+  <script src="/path/to/src/countdownTimer.min.js"></script>
   <script type="module" src="/main.js"></script>
 </head>
 
@@ -15,18 +23,29 @@
   </header>
 
   <main>
+
+
+    <div id="startPage" class="page">
+      <button class="btn btn-secondary btn-lg" id="startButton">Start</button>
+    </div>
+
     <div id="gamePage" class="page">
-      <div id="randomWord"></div>
       <div id="display">
-        <div id="result">0</div>
-        <input type="text" id="user-input">
-        <button id="startButton">Start</button>
-        <button id="submitButton">Submit</button>
-
+        <p>
+          Countdown
+          <span id="example"></span>
+        </p>
+        <div class="score" id="result">Correct: </div>
+        <div class="score" id="mistake">Mistake: </div>
+        <div id="randomWord"></div>
+        <input type="text" id="user-input" autocomplete="off">
+        <button id="exitButton">Exit</button>
       </div>
-      <div id="scorePage" class="page">
+    </div>
 
-      </div>
+    <div id="scorePage" class="page">
+      <button id="restartButton">Restart</button>
+    </div>
 
 
   </main>
