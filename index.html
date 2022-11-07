@@ -12,7 +12,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speed Typing Game</title>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
   <div class="countdown"></div>
   <script type="module" src="/main.js"></script>
 </head>
@@ -31,6 +30,7 @@
 
     <div id="gamePage" class="page">
       <div id="display">
+        <div id="timer"> </div>
         <div class="score" id="result">Correct: </div>
         <div class="score" id="mistake">Mistake: </div>
         <div id="randomWord"></div>
@@ -40,6 +40,7 @@
     </div>
 
     <div id="scorePage" class="page">
+      <div id="displayScore"></div>
       <button id="restartButton">Restart</button>
     </div>
 

@@ -7,8 +7,8 @@ const app = {
     userInput: "",
     result: 0,
     mistake: 0,
+    timer: 0,
 }
-
 
 
 //--------------------Produce random word from words array---------------------
@@ -27,19 +27,22 @@ const renderPage = () => {
 };
 renderPage();
 
-
+//---------------------------------------------------
 const startButton = () => {
+    countDown();
     $("#startButton").on("click", () => {
-        setTimer();
-        app.page = "gamePage"
+        app.timer = 60;
+        emptyUserInput();
+        app.page = "gamePage";
         getRandomWord();
         renderPage();
-        game();
+
+
     })
 }
 startButton()
 
-
+//------------------------------------------------------
 const exitButton = () => {
     $("#exitButton").on("click", () => {
         app.page = "scorePage";
@@ -49,12 +52,15 @@ const exitButton = () => {
 }
 exitButton();
 
-
+//----------------------------------------------------
 const restartButton = () => {
     $("#restartButton").on("click", () => {
         app.page = "startPage";
         renderPage();
-
+        // app.result = 0;
+        // app.mistake = 0;
+        // $("#mistake").text(`Mistake: ${app.mistake}`)
+        // $("#result").text(`Correct: ${app.result}`)
     })
 }
 restartButton();
@@ -67,7 +73,7 @@ restartButton();
 //Comparing user input and randomword. If true, result++
 const getUserInput = () => $("#user-input").val()
 
-
+//------------------------------------------------------
 const getResult = () => {
     if (getUserInput() === app.randomWord) {
         app.result++;
@@ -86,6 +92,7 @@ const getResult = () => {
 //---------------setting Enter Key---------------------------------
 const emptyUserInput = () => $("#user-input").val('');
 
+//--------------------------------------------------
 const game = () => {
     $("#user-input").on("keypress", (event) => {
         if (event.key === 'Enter') {
@@ -96,34 +103,29 @@ const game = () => {
     }
     )
 };
+game();
 
 
-//https://stackoverflow.com/questions/41035992/jquery-countdown-timer-for-minutes-and-seconds
-const setTimer = () => {
-    let timer2 = "0:05";
-    let interval = setInterval(function () {
-        let timer = timer2.split(':');
-        //by parsing integer, I avoid all extra string processing
-        let minutes = parseInt(timer[0], 10);
-        let seconds = parseInt(timer[1], 10);
-        --seconds;
-        minutes = (seconds < 0) ? --minutes : minutes;
-        seconds = (seconds < 0) ? 59 : seconds;
-        seconds = (seconds < 10) ? '0' + seconds : seconds;
-        //minutes = (minutes < 10) ?  minutes : minutes;
-        $('.countdown').html(minutes + ':' + seconds);
-        timer2 = minutes + ':' + seconds;
-        if (minutes < 0) {
+function countDown() {
+    app.timer = 60;
+    const myinterval = setInterval(function () {
+        $("#timer").text(`Time left:  ${app.timer}`);
+        if (app.timer === 0) {
+            clearInterval(myinterval);
             app.page = "scorePage";
-            const highestTimeoutId = window.setTimeout(() => {
-                for (let i = highestTimeoutId; i >= 0; i--) {
-                    window.clearInterval(i);
-                }
-            }, 0)
+            renderPage();
         }
-        renderPage();
+        else {
+            app.timer--;
+        }
     }, 1000);
-
-
 }
+
+const displayScore = () => {
+    const $displayScore = $("#displayScore").text(`Correct: ${app.result} Mistake: ${app.mistake}`)
+    $(".scorePage").append($displayScore)
+}
+
+displayScore();
+
 
