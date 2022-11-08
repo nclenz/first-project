@@ -10,6 +10,7 @@ const app = {
     timer: 0,
 }
 
+let myTimer = ""
 
 //--------------------Produce random word from words array---------------------
 const getRandomWord = () => {
@@ -28,42 +29,41 @@ const renderPage = () => {
 renderPage();
 
 //---------------------------------------------------
-const startButton = () => {
+// const startButton = () => {
+
+// }
+// startButton()
+
+$("#startButton").on("click", () => {
     countDown();
-    $("#startButton").on("click", () => {
-        app.timer = 60;
-        emptyUserInput();
-        app.page = "gamePage";
-        getRandomWord();
-        renderPage();
-
-
-    })
-}
-startButton()
+    emptyUserInput();
+    app.page = "gamePage";
+    getRandomWord();
+    renderPage();
+})
 
 //------------------------------------------------------
-const exitButton = () => {
-    $("#exitButton").on("click", () => {
-        app.page = "scorePage";
-        renderPage();
 
-    })
-}
-exitButton();
+$("#exitButton").on("click", () => {
+    app.page = "scorePage";
+    renderPage();
+    clearInterval(myTimer)
+
+})
+
 
 //----------------------------------------------------
-const restartButton = () => {
-    $("#restartButton").on("click", () => {
-        app.page = "startPage";
-        renderPage();
-        // app.result = 0;
-        // app.mistake = 0;
-        // $("#mistake").text(`Mistake: ${app.mistake}`)
-        // $("#result").text(`Correct: ${app.result}`)
-    })
-}
-restartButton();
+
+$("#restartButton").on("click", () => {
+    app.page = "startPage";
+    renderPage();
+    app.result = 0;
+    app.mistake = 0;
+    $("#mistake").text(`Mistake: ${app.mistake}`)
+    $("#result").text(`Correct: ${app.result}`)
+})
+
+
 
 
 
@@ -107,25 +107,29 @@ game();
 
 
 function countDown() {
-    app.timer = 60;
-    const myinterval = setInterval(function () {
+    app.timer = 10;
+    $("#timer").text(`Time left:  ${app.timer}`);
+    myTimer = setInterval(function () {
         $("#timer").text(`Time left:  ${app.timer}`);
         if (app.timer === 0) {
-            clearInterval(myinterval);
+            //clearInterval(myinterval);
+
+            clearInterval(myTimer)
+            $("#displayScore").text(`Correct: ${app.result} Mistake: ${app.mistake}`)
             app.page = "scorePage";
             renderPage();
         }
         else {
             app.timer--;
         }
-    }, 1000);
+    }, 1000)
 }
 
 const displayScore = () => {
-    const $displayScore = $("#displayScore").text(`Correct: ${app.result} Mistake: ${app.mistake}`)
-    $(".scorePage").append($displayScore)
 }
 
+const $displayScore = $("#displayScore").text(`Correct: ${app.result} Mistake: ${app.mistake}`)
+$(".scorePage").append($displayScore)
 displayScore();
 
 
