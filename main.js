@@ -1,7 +1,7 @@
 import $ from "jquery";
 
 const app = {
-    words: ["albertosaurus", "allosaurus", "tyrannosaur", "Sauropods", "achelousaurus"],
+    words: "",
     page: "startPage",
     randomWord: "",
     userInput: "",
@@ -10,15 +10,30 @@ const app = {
     timer: 0,
 }
 
-let myTimer = ""
+let myTimer = "";
+let easyWord = ['1', '2', '3'];
+let mediumWord = ['one', 'two', 'three'];
+let hardWord = ["albertosaurus", "allosaurus", "tyrannosaur", "Sauropods", "achelousaurus"];
+
+
+
 
 //--------------------Produce random word from words array---------------------
 const getRandomWord = () => {
-    const randomIndex = Math.floor(Math.random() * app.words.length);
+    if ($("select").val() === "easyMode") {
+        app.words = easyWord;
+    }
+    if ($("select").val() === "mediumMode") {
+        app.words = mediumWord;
+    }
+    if ($("select").val() === "hardMode") {
+        app.words = hardWord;
+    }
+    const randomIndex = Math.floor(Math.random() * easyWord.length);
     app.randomWord = app.words[randomIndex];
     $("#randomWord").text(app.randomWord)
-}
 
+}
 
 //-------------------- buttons that render to different pages-------------------
 const renderPage = () => {
@@ -29,10 +44,6 @@ const renderPage = () => {
 renderPage();
 
 //---------------------------------------------------
-// const startButton = () => {
-
-// }
-// startButton()
 
 $("#startButton").on("click", () => {
     countDown();
@@ -51,22 +62,18 @@ $("#exitButton").on("click", () => {
     $("#displayScore").text(`Correct: ${app.correct} Mistake: ${app.mistake}`)
 })
 
-
 //----------------------------------------------------
-
-$("#restartButton").on("click", () => {
-    app.page = "startPage";
-    renderPage();
-    app.correct = 0;
-    app.mistake = 0;
-    $("#mistake").text(`Mistake: ${app.mistake}`)
-    $("#result").text(`Correct: ${app.correct}`)
-})
-
-
-
-
-
+const restartButton = () => {
+    $("#restartButton").on("click", () => {
+        app.page = "startPage";
+        renderPage();
+        app.correct = 0;
+        app.mistake = 0;
+        $("#mistake").text(`Mistake: ${app.mistake}`)
+        $("#result").text(`Correct: ${app.correct}`)
+    })
+}
+restartButton();
 
 //--------------------Get and set result------------------------------->
 
@@ -78,16 +85,12 @@ const getResult = () => {
     if (getUserInput() === app.randomWord) {
         app.correct++;
         $("#result").text(`Correct: ${app.correct}`)
-
     }
     else {
         app.mistake++;
         $("#mistake").text(`Mistake: ${app.mistake}`)
-
     }
-
 }
-
 
 //---------------setting Enter Key---------------------------------
 const emptyUserInput = () => $("#user-input").val('');
@@ -105,15 +108,12 @@ const game = () => {
 };
 game();
 
-
 function countDown() {
-    app.timer = 10;
+    app.timer = 100;
     $("#timer").text(`Time left:  ${app.timer}`);
     myTimer = setInterval(function () {
         $("#timer").text(`Time left:  ${app.timer}`);
         if (app.timer === 0) {
-            //clearInterval(myinterval);
-
             clearInterval(myTimer)
             $("#displayScore").text(`Correct: ${app.correct} Mistake: ${app.mistake}`)
             app.page = "scorePage";
@@ -124,7 +124,5 @@ function countDown() {
         }
     }, 1000)
 }
-
-$(".scorePage").append$("#displayScore").text(`Correct: ${app.correct} Mistake: ${app.mistake}`)
 
 

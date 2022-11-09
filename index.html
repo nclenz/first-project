@@ -23,14 +23,18 @@
 
   <main>
 
-
     <div id="startPage" class="page">
+      <select>
+        <option value="easyMode">Easy</option>
+        <option value="mediumMode">Medium</option>
+        <option value="hardMode">Hard</option>
+      </select>
       <button class="btn btn-secondary btn-lg" id="startButton">Start</button>
     </div>
 
     <div id="gamePage" class="page">
       <div id="display">
-        <div id="timer"> </div>
+        <div id="timer" class="score"> </div>
         <div class="score" id="result">Correct: </div>
         <div class="score" id="mistake">Mistake: </div>
         <div id="randomWord"></div>
@@ -43,7 +47,6 @@
       <div id="displayScore"></div>
       <button id="restartButton">Restart</button>
     </div>
-
 
   </main>
 </body>

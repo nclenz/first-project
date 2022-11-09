@@ -5,6 +5,12 @@ h1 {
     font-family: 'Press Start 2P', cursive;
 }
 
+#gamePage {
+    display: flex;
+    justify-content: center;
+    padding: 60px;
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -14,7 +20,7 @@ main {
 .score {
     display: inline-flex;
     justify-content: space-around;
-    padding: 50px;
+    padding-inline: 50px;
     margin: 20px;
     font-weight: bold;
     font-size: 30px;
@@ -24,24 +30,28 @@ main {
     font-size: 50px;
     font-weight: bold;
     font-family: sans-serif;
-    color: rebeccapurple
+    color: rebeccapurple;
+    display: flex;
+    justify-content: center;
 }
 
 body {
     background-color: aqua !important;
 }
 
-#displayScore {
-    display: inline-flex;
-    justify-content: space-around;
-    padding: 50px;
-    margin: 20px;
-    font-weight: bold;
-    font-size: 30px;
 
-}
 
 #restartButton {
     display: flex;
     justify-content: center;
+}
+
+#timer {
+    font-size: 20px;
+}
+
+select {
+    width: 150px;
+    height: 30px;
+
 }
