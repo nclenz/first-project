@@ -5,7 +5,7 @@ const app = {
     page: "startPage",
     randomWord: "",
     userInput: "",
-    result: 0,
+    correct: 0,
     mistake: 0,
     timer: 0,
 }
@@ -48,7 +48,7 @@ $("#exitButton").on("click", () => {
     app.page = "scorePage";
     renderPage();
     clearInterval(myTimer)
-
+    $("#displayScore").text(`Correct: ${app.correct} Mistake: ${app.mistake}`)
 })
 
 
@@ -57,10 +57,10 @@ $("#exitButton").on("click", () => {
 $("#restartButton").on("click", () => {
     app.page = "startPage";
     renderPage();
-    app.result = 0;
+    app.correct = 0;
     app.mistake = 0;
     $("#mistake").text(`Mistake: ${app.mistake}`)
-    $("#result").text(`Correct: ${app.result}`)
+    $("#result").text(`Correct: ${app.correct}`)
 })
 
 
@@ -76,8 +76,8 @@ const getUserInput = () => $("#user-input").val()
 //------------------------------------------------------
 const getResult = () => {
     if (getUserInput() === app.randomWord) {
-        app.result++;
-        $("#result").text(`Correct: ${app.result}`)
+        app.correct++;
+        $("#result").text(`Correct: ${app.correct}`)
 
     }
     else {
@@ -115,7 +115,7 @@ function countDown() {
             //clearInterval(myinterval);
 
             clearInterval(myTimer)
-            $("#displayScore").text(`Correct: ${app.result} Mistake: ${app.mistake}`)
+            $("#displayScore").text(`Correct: ${app.correct} Mistake: ${app.mistake}`)
             app.page = "scorePage";
             renderPage();
         }
@@ -125,11 +125,6 @@ function countDown() {
     }, 1000)
 }
 
-const displayScore = () => {
-}
-
-const $displayScore = $("#displayScore").text(`Correct: ${app.result} Mistake: ${app.mistake}`)
-$(".scorePage").append($displayScore)
-displayScore();
+$(".scorePage").append$("#displayScore").text(`Correct: ${app.correct} Mistake: ${app.mistake}`)
 
 

@@ -30,3 +30,18 @@ main {
 body {
     background-color: aqua !important;
 }
+
+#displayScore {
+    display: inline-flex;
+    justify-content: space-around;
+    padding: 50px;
+    margin: 20px;
+    font-weight: bold;
+    font-size: 30px;
+
+}
+
+#restartButton {
+    display: flex;
+    justify-content: center;
+}
