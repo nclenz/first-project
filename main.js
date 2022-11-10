@@ -11,9 +11,14 @@ const app = {
 }
 
 let myTimer = "";
-let easyWord = ['1', '2', '3'];
-let mediumWord = ['one', 'two', 'three'];
-let hardWord = ["albertosaurus", "allosaurus", "tyrannosaur", "Sauropods", "achelousaurus"];
+let easyWord = ['zebra', 'horse', 'cat', 'dog', 'panda', 'tiger', 'lion', 'bird', 'snake', 'goat', 'donkey', 'shark', 'camel', 'hamster', 'spider',
+    'sheep', 'turtle', 'frog', 'leopard', 'cheetah', 'whale', 'mouse', 'fish', 'octopus', 'duck', 'goose', 'bear', 'seal', 'deer', 'pig', 'cow', 'lizard'];
+let mediumWord = ['german shepherd', 'bulldog', 'siberian husky', 'alaskan malamute', 'great dane', 'yorkshire terrier', 'rottweiler', 'pomeranian', 'havanese', 'shih tzu',
+    'labradoodle', 'labrador retriever', 'norwegian buhund', 'neapolitan mastiff', 'patterdale terrier', 'rhodesian ridgeback', 'deutscher wachtelhund', 'dogo argentino',
+    'drentsche patrijshond', 'finnish lapphund'];
+let hardWord = ["albertosaurus", "allosaurus", "tyrannosaur", "sauropods", " pseudopseudohypoparathyroidism", 'pneumonoultramicroscopicsilicovolcanoconiosis', 'floccinaucinihilipilification', 'antidisestablishmentarianism',
+    'supercalifragilisticexpialidocious', 'incomprehensibilities', 'honorificabilitudinitatibus', 'Sesquipedalianism', 'otorhinolaryngological', 'dermatoglyphics', 'micropachycephalosaurus', 'carcharodontosaurus', 'eustreptospondylus', 'pachycephalosaurus',
+    'archaeornithomimus'];
 
 
 
@@ -109,7 +114,7 @@ const game = () => {
 game();
 
 function countDown() {
-    app.timer = 100;
+    app.timer = 30;
     $("#timer").text(`Time left:  ${app.timer}`);
     myTimer = setInterval(function () {
         $("#timer").text(`Time left:  ${app.timer}`);
