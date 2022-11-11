@@ -12,10 +12,13 @@ const app = {
 
 let myTimer = "";
 let easyWord = ['zebra', 'horse', 'cat', 'dog', 'panda', 'tiger', 'lion', 'bird', 'snake', 'goat', 'donkey', 'shark', 'camel', 'hamster', 'spider',
-    'sheep', 'turtle', 'frog', 'leopard', 'cheetah', 'whale', 'mouse', 'fish', 'octopus', 'duck', 'goose', 'bear', 'seal', 'deer', 'pig', 'cow', 'lizard'];
+    'sheep', 'turtle', 'frog', 'leopard', 'cheetah', 'whale', 'mouse', 'fish', 'octopus', 'duck', 'goose', 'bear', 'seal', 'deer', 'pig', 'cow',
+    'lizard', 'hyena', 'kangaroo', 'crocodile', 'dragon'];
+
 let mediumWord = ['german shepherd', 'bulldog', 'siberian husky', 'alaskan malamute', 'great dane', 'yorkshire terrier', 'rottweiler', 'pomeranian', 'havanese', 'shih tzu',
     'labradoodle', 'labrador retriever', 'norwegian buhund', 'neapolitan mastiff', 'patterdale terrier', 'rhodesian ridgeback', 'deutscher wachtelhund', 'dogo argentino',
     'drentsche patrijshond', 'finnish lapphund'];
+
 let hardWord = ["albertosaurus", "allosaurus", "tyrannosaur", "sauropods", " pseudopseudohypoparathyroidism", 'pneumonoultramicroscopicsilicovolcanoconiosis', 'floccinaucinihilipilification', 'antidisestablishmentarianism',
     'supercalifragilisticexpialidocious', 'incomprehensibilities', 'honorificabilitudinitatibus', 'Sesquipedalianism', 'otorhinolaryngological', 'dermatoglyphics', 'micropachycephalosaurus', 'carcharodontosaurus', 'eustreptospondylus', 'pachycephalosaurus',
     'archaeornithomimus'];
@@ -34,7 +37,7 @@ const getRandomWord = () => {
     if ($("select").val() === "hardMode") {
         app.words = hardWord;
     }
-    const randomIndex = Math.floor(Math.random() * easyWord.length);
+    const randomIndex = Math.floor(Math.random() * app.words.length);
     app.randomWord = app.words[randomIndex];
     $("#randomWord").text(app.randomWord)
 
